@@ -1,0 +1,27 @@
+:root {
+  font-family: sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.day {
+  color: white;
+  background-image: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  width: 500px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.list {
+  outline: solid 1px black;
+  text-align: center;
+}
+
+ul li {
+  text-align: left;
+}
