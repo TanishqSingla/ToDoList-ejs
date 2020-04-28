@@ -9,9 +9,9 @@
     <h1><%= day %></h1>
 
     <ul>
-      <li>Bread</li>
-      <li>Milk</li>
-      <li><%=newListItem%></li>
+      <% for(let i in newListItem) { %>
+      <li><%=newListItem[i]%></li>
+      <% } %>
     </ul>
 
     <form action="/" method="post">
