@@ -18,7 +18,13 @@ const itemsSchema = {
   name: String,
 };
 
+const listSchema = {
+  name: String,
+  items: [itemsSchema],
+};
+
 const Item = mongoose.model("Item", itemsSchema);
+const List = mongoose.model("List", listSchema);
 
 const item1 = new Item({
   name: "Welcome to your todolist!",
