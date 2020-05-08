@@ -43,9 +43,10 @@ app.get("/", (req, res) => {
           console.log("Successfully added to db");
         }
       });
+      res.redirect("/");
+    } else {
+      res.render("list", { listTitle: "Today", newListItem: foundItems });
     }
-
-    res.render("list", { listTitle: "Today", newListItem: foundItems });
   });
 });
 
