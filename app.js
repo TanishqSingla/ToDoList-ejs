@@ -11,6 +11,7 @@ app.use(express.static("public"));
 
 mongoose.connect("mongodb://localhost:27017/todolistDB", {
   useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
 const itemsSchema = {
@@ -60,6 +61,18 @@ app.post("/", (req, res) => {
   item.save();
 
   res.redirect("/");
+});
+
+app.post("/delete", (req, res) => {
+  const checkedItemId = req.body.checkbox;
+  console.log("delete");
+
+  Item.findByIdAndRemove(checkedItemId, (e) => {
+    if (!e) {
+      console.log("Successfully deleted item");
+      res.redirect("/");
+    }
+  });
 });
 
 app.get("/work", (req, res) => {
