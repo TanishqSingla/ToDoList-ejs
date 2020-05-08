@@ -26,6 +26,7 @@ app.get("/", (req, res) => {
 
 app.post("/", (req, res) => {
   let item = req.body.newItem;
+  if (item === "" || item == null) return;
   items.push(item);
 
   res.redirect("/");
