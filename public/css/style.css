@@ -37,7 +37,7 @@ body {
   text-decoration: line-through;
 }
 
-form {
+form.newItem {
   box-shadow: 0px 1px 3px -1px rgba(0, 0, 0, 0.6);
   width: 490px;
   border-radius: 5px;
@@ -47,7 +47,7 @@ form {
   padding: 10px;
 }
 
-form input {
+form.newItem input {
   border: none;
   font-size: 1.6rem;
   outline: none;
