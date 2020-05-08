@@ -42,7 +42,9 @@ Item.insertMany(defaultItems, (e) => {
 });
 
 app.get("/", (req, res) => {
-  res.render("list", { listTitle: "Today", newListItem: items });
+  Item.find({}, (e, foundItems) => {
+    res.render("list", { listTitle: "Today", newListItem: foundItems });
+  });
 });
 
 app.post("/", (req, res) => {
