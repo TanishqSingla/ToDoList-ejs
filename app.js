@@ -9,6 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 let items = [];
+let workItems = [];
 
 app.get("/", (req, res) => {
   let today = new Date();
@@ -21,15 +22,24 @@ app.get("/", (req, res) => {
 
   let day = today.toLocaleDateString("en-US", format);
 
-  res.render("list", { day, newListItem: items });
+  res.render("list", { listTitle: day, newListItem: items });
 });
 
 app.post("/", (req, res) => {
   let item = req.body.newItem;
-  if (item === "" || item == null) return;
-  items.push(item);
+  if (req.body.list === "Work") {
+    workItems.push(item);
+    res.redirect("/work");
+  } else {
+    if (item === "" || item == null) return;
+    items.push(item);
 
-  res.redirect("/");
+    res.redirect("/");
+  }
+});
+
+app.get("/work", (req, res) => {
+  res.render("list", { listTitle: "Work List", newListItem: workItems });
 });
 
 app.get("/about", (req, res) => {
