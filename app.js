@@ -75,8 +75,8 @@ app.post("/delete", (req, res) => {
   });
 });
 
-app.get("/work", (req, res) => {
-  res.render("list", { listTitle: "Work List", newListItem: workItems });
+app.get("/:customListName", (req, res) => {
+  const customListName = req.params.customListName;
 });
 
 app.get("/about", (req, res) => {
