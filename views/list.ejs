@@ -8,6 +8,8 @@
       <input type="checkbox" name="checkbox" value=<%=newItem._id%> onChange="this.form.submit()"/>
       <p><%=newItem.name %></p>
     </div>
+    <!-- Getting the list name for custom lists -->
+    <input type="hidden" name="listName" value="<%= listTitle %>"></input>
   </form>
   <% }) %>
 </div>
