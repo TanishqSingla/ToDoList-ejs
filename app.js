@@ -59,14 +59,22 @@ app.get("/", (req, res) => {
 
 app.post("/", (req, res) => {
   const itemName = req.body.newItem;
+  const listTitle = req.body.list;
 
   const item = new Item({
     name: itemName,
   });
 
-  item.save();
-
-  res.redirect("/");
+  if (listTitle === "Today") {
+    item.save();
+    res.redirect("/");
+  } else {
+    List.findOne({ name: listTitle }, (e, foundList) => {
+      foundList.items.push(item);
+      foundList.save();
+      res.redirect(`/${listTitle}`);
+    });
+  }
 });
 
 app.post("/delete", (req, res) => {
@@ -92,6 +100,7 @@ app.get("/:customListName", (req, res) => {
           items: defaultItems,
         });
         list.save();
+        res.redirect(`/${customListName}`);
       } else {
         res.render("list", {
           listTitle: foundList.name,
