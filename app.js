@@ -14,16 +14,16 @@ mongoose.connect("mongodb://localhost:27017/todolistDB", {
   useUnifiedTopology: true,
 });
 
-const itemsSchema = {
+const itemSchema = {
   name: String,
 };
 
 const listSchema = {
   name: String,
-  items: [itemsSchema],
+  items: [itemSchema],
 };
 
-const Item = mongoose.model("Item", itemsSchema);
+const Item = mongoose.model("Item", itemSchema);
 const List = mongoose.model("List", listSchema);
 
 const item1 = new Item({
@@ -83,6 +83,23 @@ app.post("/delete", (req, res) => {
 
 app.get("/:customListName", (req, res) => {
   const customListName = req.params.customListName;
+
+  List.findOne({ name: customListName }, (e, foundList) => {
+    if (!e) {
+      if (!foundList) {
+        const list = new List({
+          name: customListName,
+          items: defaultItems,
+        });
+        list.save();
+      } else {
+        res.render("list", {
+          listTitle: foundList.name,
+          newListItem: foundList.items,
+        });
+      }
+    }
+  });
 });
 
 app.get("/about", (req, res) => {
